@@ -29,8 +29,12 @@ export default function CurrencyConverter() {
       const toRate = getExchangeRate(currencyTo.toUpperCase());
       const result = (Number(amount) * toRate) / fromRate;
       setConvertedAmount(result.toFixed(2));
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred");
+      }
     }
   };
 
